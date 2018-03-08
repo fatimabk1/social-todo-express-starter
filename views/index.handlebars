@@ -29,13 +29,34 @@
     </div>
 
 {{else}}
-<div>
-  Login
+<div class="login">
+  <form action="/user/login" method="post">
+  <fieldset>
+    <legend>Login </legend>
+    Email:<t> <input type="text" name="email" id="email" value="">
+      <br>
+    Password:<t> <input type="text" name="password" id="password" value="">
+      <br>
+    <input type="submit" value="Submit">
+  </fieldset>
+  </form>
 </div>
 
 <div><hr></div>
 
-<div>
-  Register
+<div class="register">
+  <form action="/user/register" method="post">
+  <fieldset>
+    <legend>New User? Register Here:</legend>
+      <input type="text" name="name" id="name" value="First, Last">
+      <input type="text" name="email" id="email" value="Email Address">
+      <input type="text" name="password" id="password" value="Password">
+      <input type="text" name="password-confirmation" id="password-confirmation" value="Confirm Password">
+      <input type="submit" value="Submit">
+  </fieldset>
+  </form>
+
+
+
 </div>
 {{/if}}

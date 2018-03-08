@@ -19,6 +19,16 @@ mongoose.connect(process.env.MONGO_URL);
 const Users = require('./models/users.js');
 const Tasks = require('./models/tasks.js');
 
+
+// var MongoClient = require('mongodb').MongoClient;
+// var uri = "mongodb+srv://fatimabk1:213@213-social-to-do-i4uhp.mongodb.net/test";
+// MongoClient.connect(uri, function(err, client) {
+//    const collection = client.db("test").collection("devices");
+//    // perform actions on the collection object
+//    client.close();
+// });
+
+
 // Configure our app
 const store = new MongoDBStore({
     uri: process.env.MONGO_URL,
