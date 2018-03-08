@@ -14,7 +14,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 
 const app = express();
-mongoose.connect(process.env.MONGO_URL);
+mongoose.connect(process.env.MONGO_URL || "mongodb://fatimabk1:213@213-social-to-do-i4uhp.mongodb.net/test");
 
 const Users = require('./models/users.js');
 const Tasks = require('./models/tasks.js');
@@ -102,15 +102,30 @@ function loadUserTasks(req, res, next) {
 
 // Return the home page after loading tasks for users, or not.
 app.get('/', loadUserTasks, (req, res) => {
-    res.render('index');
+      res.render('index');
 });
 
 // Handle submitted form for new users
 app.post('/user/register', (req, res) => {
-    res.send('woot');
+    if(req.name == null || req.email == null || req.password == null){
+      Window.alert("Please fill in all fields to register.");
+    } else if(req.password != req.passwordConfirmation){
+      Window.alert("Passwords must match.");
+    } else if(req.pasword.length < 0 || req.password.length > 50){
+      Window.alert("Password must be between 1 and 50 characters.");
+    } else if (    ){
+      Window.alert("Invalid email entered.");
+    } else {
+      // Add user data to User schema
+      // Return HTMl for logged-in view
+      res.send('woot');
+    }
+    res.render('/');
 });
 
 app.post('/user/login', (req, res) => {
+
+
     res.send('woot');
 });
 
