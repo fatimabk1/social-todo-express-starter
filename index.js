@@ -14,26 +14,17 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 
 const app = express();
-mongoose.connect(process.env.MONGO_URL || "mongodb://fatimabk1:213@213-social-to-do-i4uhp.mongodb.net/test");
+mongoose.connect(process.env.MONGO_URL);
 
 const Users = require('./models/users.js');
 const Tasks = require('./models/tasks.js');
-
-
-// var MongoClient = require('mongodb').MongoClient;
-// var uri = "mongodb+srv://fatimabk1:213@213-social-to-do-i4uhp.mongodb.net/test";
-// MongoClient.connect(uri, function(err, client) {
-//    const collection = client.db("test").collection("devices");
-//    // perform actions on the collection object
-//    client.close();
-// });
-
 
 // Configure our app
 const store = new MongoDBStore({
     uri: process.env.MONGO_URL,
     collection: 'sessions',
 });
+
 app.engine('handlebars', exphbs({
     defaultLayout: 'main',
 }));
@@ -113,8 +104,8 @@ app.post('/user/register', (req, res) => {
       Window.alert("Passwords must match.");
     } else if(req.pasword.length < 0 || req.password.length > 50){
       Window.alert("Password must be between 1 and 50 characters.");
-    } else if (    ){
-      Window.alert("Invalid email entered.");
+    } else if (!validateEmail(req.email)){
+      Window.alert("Invalid email address.");
     } else {
       // Add user data to User schema
       // Return HTMl for logged-in view
@@ -122,6 +113,11 @@ app.post('/user/register', (req, res) => {
     }
     res.render('/');
 });
+
+function validateEmail(email){
+  let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+}
 
 app.post('/user/login', (req, res) => {
 
